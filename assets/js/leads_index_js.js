@@ -1,22 +1,27 @@
 $(document).ready(function(){
-	$(document).on('click', 'a', function(){
-		$.post($(this).attr('href'),
-			function(data) {
-				console.log(data);
-				displayData(data);
-			}, 'json');
-		return false;
-	})
+
+	var url = $('#limitSearchForm').attr('action');
+
 	$(document).on('submit', '#limitSearchForm', function(){
 		$.post($(this).attr('action'),
 			$(this).serialize(),
 			function(data){
 				displayData(data);
+				$('#limitSearchForm').attr('action', url);
 			}, 'json');
 		return false;
 	})
-	$(document).on('keyup change', 'input', function(){
-		$(this).parent().parent().submit();
+	$(document).on('keyup change', 'input', function(){		
+		$('#limitSearchForm').submit();
+	})
+	$(document).on('click', 'a', function(){
+		var href = $(this).attr('href');
+		var hash = href.split("/", 3);
+		var limit = hash[2];
+		var temp = url+"/"+limit;
+		$('#limitSearchForm').attr('action', temp);
+		$('#limitSearchForm').submit();
+		return false;		
 	})
 	function displayData(data) {
 		$('#pagination').html(data.pagination);
