@@ -1,0 +1,18 @@
+label {
+	color:dimgrey;
+}
+.pagination>li>a {
+	color:#555;
+}
+.pagination>li>a:hover {
+	background-color:silver;
+	font-weight: bold;
+	color: #555;
+}
+.pagination>.active>a, .pagination>.active>a:hover {
+	background-color:#e7e7e7;
+	border-color:#ddd;
+}
+#name_input {
+	width: 200px;
+}
